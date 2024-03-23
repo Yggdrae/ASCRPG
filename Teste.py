@@ -78,10 +78,6 @@ mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
 barbaro = classes("Barbaro", 60, 5, 5, 1)
 classe.append(barbaro)
-inimigo = classe[random.randrange(0, 2)]
-
-opc = 0
-
 
 os.system('cls')
 print("Escolha a classe de seu personagem: ")
@@ -89,6 +85,7 @@ print("0 - Mago")
 #print("1 - Barbaro")
 opc = int(input("Escolha: "))
 jogador = classe[opc]
+inimigo = classe[random.randrange(0, int(len(classe)))]
 os.system('cls')
 print("Classe escolhida: " + classe[opc].nome)
 os.system('pause')
