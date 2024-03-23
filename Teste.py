@@ -74,6 +74,10 @@ class classes:
         print("_.'  \\'-'  /  |")
         print("`----'`=-='   '")
 
+    #def inimigo():
+
+
+
 mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
 barbaro = classes("Barbaro", 60, 5, 5, 1)
@@ -87,7 +91,8 @@ opc = int(input("Escolha: "))
 jogador = classe[opc]
 inimigo = classe[random.randrange(0, int(len(classe)))]
 os.system('cls')
-print("Classe escolhida: " + classe[opc].nome)
+print("Classe escolhida.........: " + classe[opc].nome)
+print("Classe escolhida pela CPU: " + inimigo.nome)
 os.system('pause')
 
 while jogador.hpatual != 0 or inimigo.hpatual != 0:
