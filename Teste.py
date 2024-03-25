@@ -74,7 +74,7 @@ class classes:
         print("_.'  \\'-'  /  |")
         print("`----'`=-='   '")
 
-    #def inimigo():
+    def inimigo():
 
 
 
