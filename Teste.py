@@ -77,7 +77,7 @@ class classes:
         print("`----'`=-='   '")
 
     #def inimigo():
-        
+
 
 mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
