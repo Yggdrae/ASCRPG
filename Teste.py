@@ -1,6 +1,7 @@
 import os
-import time
+import sys
 import random
+from time import sleep
 
 classe = []
 vida = []
@@ -76,8 +77,7 @@ class classes:
         print("`----'`=-='   '")
 
     #def inimigo():
-
-
+        
 
 mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
@@ -90,8 +90,16 @@ print("0 - Mago")
 #print("1 - Barbaro")
 opc = int(input("Escolha: "))
 jogador = classe[opc]
-print("O CPU está selecionando uma classe...")
-time.sleep(2)
+print("O CPU está selecionando uma classe", end="") ; sleep(1)
+
+for x in range(1, 4):
+    if x == 3:
+        print(".") ; sleep(1)
+    else:
+        sys.stdout.flush()
+        print(".", end="")  ; sleep(1)
+        sys.stdout.flush()
+
 inimigo = classe[random.randrange(0, int(len(classe)))]
 print("Classe escolhida.........: " + classe[opc].nome)
 print("Classe escolhida pela CPU: " + inimigo.nome)
