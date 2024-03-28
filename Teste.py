@@ -21,6 +21,7 @@ class classes:
         self.atk = atk
         self.matk = matk
         self.hpatual = maxhp
+
     def atacar(self):
         print("Rolando um dado... ")
         os.system('pause')
@@ -52,32 +53,80 @@ class classes:
         os.system('pause')
         return dmg
     
-    def attmago(self):
+    def artemago():
+        print(" ______________________________")        
+        print("|               ,              |")
+        print("|              /|   | |        |")
+        print("|            _/_\\_  >_<        |")
+        print("|           .-\\-/.   |         |")
+        print("|          /  | | \\_ |         |")
+        print("|          \\ \\| |\\__(/         |")
+        print("|          /(`---')  |         |")
+        print("|         / /     \\  |         |")
+        print("|      _.'  \\'-'  /  |         |")
+        print("|      `----'`=-='   '         |")
+        print("\\______________________________/")
+        
+    def artebarb():
+        print(" _______________________________")
+        print("|                      __)\\     |")
+        print("|      .----.       __)    \\    |")
+        print("|     |  = = |     <  ___   |   |")
+        print("|  ___|  : : |___   \\\\   `)/    |")
+        print("|  \\   `----´   /\\  (\\\\)  (     |")
+        print("|   \\   `.     /( \\/ /\\\\        |")
+        print("|    |    :   |  \\  /  \\\\       |")
+        print("|    \\        /   `\"            |")
+        print("|    |xx(o)xx|                  |")
+        print("\\_______________________________/")
+
+    def att(self):
+        vida.clear()
+        print("Barra de vida do oponente:")
+        for x in range(0, inimigo.maxhp):
+            if x < inimigo.hpatual:
+                vida.append("-")
+            elif x >= inimigo.hpatual:
+                vida.append(" ")
+            if x == 0:
+                print("[" + colorama.Fore.RED + vida[x], end="")
+            elif x < inimigo.maxhp-1:
+                print(vida[x], end="")
+            else:
+                print(vida[x] + colorama.Fore.RESET + "] " + str(inimigo.hpatual) + "/" + str(inimigo.maxhp))
+        if inimigo.nome == "Mago":
+               classes.artemago()
+        elif inimigo.nome == "Barbaro":
+               classes.artebarb()
+
+        #def infos(self):
+            #if jogador.nome == "Mago":
+
+
+            #elif jogador.nome == "Barbaro":
+
+    def infos(self):
+        os.system('cls')
         vida.clear()
         print("Barra de vida do Jogador: ")
-        for x in range(0, mago.maxhp):
-            if x < mago.hpatual:
+        for x in range(0, jogador.maxhp):
+            if x < jogador.hpatual:
                 vida.append("-")
-            elif x >= mago.hpatual:
+            elif x >= jogador.hpatual:
                 vida.append(" ")
             if x == 0:
                 print("[" + colorama.Fore.LIGHTGREEN_EX + vida[x], end="")
-            elif x < mago.maxhp-1:
+            elif x < jogador.maxhp-1:
                 print(vida[x], end="")
             else:
-                print(vida[x] + colorama.Fore.RESET + "]" + str(mago.hpatual) + "/" + str(mago.maxhp))
-        print(colorama.Fore.RED + "               ,    ")
-        print("              /|   | |                                              __)\\")
-        print("            _/_\\_  >_<                              .----.       __)    \\")
-        print("           .-\\-/.   |                              |  = = |     <  ___   |")
-        print("          /  | | \\_ |                           ___|  : : |___   \\\\   `)/")
-        print("          \\ \\| |\\__(/                           \\   `----´   /\\  (\\\\)  (")
-        print("          /(`---')  |                            \\   `.     /( \\/ /\\\\")
-        print("         / /     \\  |                             |    :   |  \\  /  \\\\")
-        print("      _.'  \\'-'  /  |                             \\        /   `\"")
-        print("      `----'`=-='   '                              |xx(o)xx|" + colorama.Fore.RESET)
-
-    #def inimigo():
+                print(vida[x] + colorama.Fore.RESET + "]" + str(jogador.hpatual) + "/" + str(jogador.maxhp))
+        if jogador.nome == "Mago":
+               classes.artemago()
+        elif jogador.nome == "Barbaro":
+               classes.artebarb()
+        print("Ataque do jogador: " + str(jogador.atk))
+        print("Ataque magico do jogador: " + str(jogador.matk))
+        os.system('pause')
 
 mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
@@ -100,23 +149,28 @@ for x in range(1, 4):
         print(".", end="")  ; sleep(1)
         sys.stdout.flush()
 
-inimigo = classe[random.randrange(0, int(len(classe)))]
+#inimigo = classe[random.randrange(0, int(len(classe)))]
+inimigo = classe[1]
 print("Classe escolhida.........: " + classe[opc].nome)
 print("Classe escolhida pela CPU: " + inimigo.nome)
 os.system('pause')
 
+jogador.hpatual = 5
+inimigo.hpatual = 2
 while jogador.hpatual != 0 or inimigo.hpatual != 0:
     os.system('cls')
-    if jogador.nome == "Mago":
-        jogador.attmago()
+    inimigo.att()
     print("1 - Ataque com Arma")
     print("2 - Usar magia")
+    print("3 - Mostrar status")
     try:
         r = int(input("Escolha sua ação: "))
         if r == 1:
             jogador.atacar()
         elif r == 2:
             jogador.fireball()
+        elif r == 3:
+            jogador.infos()
     except:
         print("Escolha uma opção válida!")
         os.system('pause')
