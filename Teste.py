@@ -2,6 +2,7 @@ import os
 import sys
 import random
 from time import sleep
+import colorama
 
 classe = []
 vida = []
@@ -27,11 +28,11 @@ class classes:
         if r == 1:
             dmg = 0
         elif r == 20:
-            print("DANO CRITICO!")
+            print(colorama.Fore.RED + "DANO CRITICO!" + colorama.Fore.RESET)
             dmg = self.atk * 2
         else:
             dmg = random.randrange(1, int(self.atk)+1)
-        print("Rolou: " + str(r) + " você causou " + str(dmg) + " pontos de dano")
+        print("Rolou: " + str(r) + " você causou " + colorama.Fore.RED + str(dmg) + colorama.Fore.RESET + " pontos de dano")
         os.system('pause')
         return dmg
     
@@ -43,11 +44,11 @@ class classes:
         if r == 1:
             dmg = 0
         elif r == 20:
-            print("DANO CRITICO!")
+            print(colorama.Fore.RED + "DANO CRITICO!" + colorama.Fore.RESET)
             dmg = self.matk * 2
         else:
             dmg = random.randrange(1, int(self.matk)+1)
-        print("Rolou: " + str(r) + " você causou " + str(dmg) + " pontos de dano")
+        print("Rolou: " + str(r) + " você causou " + colorama.Fore.RED + str(dmg) + colorama.Fore.RESET + " pontos de dano")
         os.system('pause')
         return dmg
     
@@ -60,24 +61,23 @@ class classes:
             elif x >= mago.hpatual:
                 vida.append(" ")
             if x == 0:
-                print("[" + vida[x], end="")
+                print("[" + colorama.Fore.LIGHTGREEN_EX + vida[x], end="")
             elif x < mago.maxhp-1:
                 print(vida[x], end="")
             else:
-                print(vida[x]+ "]" + str(mago.hpatual) + "/" + str(mago.maxhp))
-        print("         ,    _")
-        print("        /|   | |")
-        print("      _/_\\_  >_<")
-        print("     .-\\-/.   |")
-        print("    /  | | \\_ |")
-        print("    \\ \\| |\\__(/")
-        print("    /(`---')  |")
-        print("   / /     \\  |")
-        print("_.'  \\'-'  /  |")
-        print("`----'`=-='   '")
+                print(vida[x] + colorama.Fore.RESET + "]" + str(mago.hpatual) + "/" + str(mago.maxhp))
+        print(colorama.Fore.RED + "               ,    ")
+        print("              /|   | |                                              __)\\")
+        print("            _/_\\_  >_<                              .----.       __)    \\")
+        print("           .-\\-/.   |                              |  = = |     <  ___   |")
+        print("          /  | | \\_ |                           ___|  : : |___   \\\\   `)/")
+        print("          \\ \\| |\\__(/                           \\   `----´   /\\  (\\\\)  (")
+        print("          /(`---')  |                            \\   `.     /( \\/ /\\\\")
+        print("         / /     \\  |                             |    :   |  \\  /  \\\\")
+        print("      _.'  \\'-'  /  |                             \\        /   `\"")
+        print("      `----'`=-='   '                              |xx(o)xx|" + colorama.Fore.RESET)
 
     #def inimigo():
-
 
 mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
