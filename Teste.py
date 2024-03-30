@@ -12,8 +12,10 @@ class classes:
     maxhp = 0
     hpatual = 0
     maxmana = 0
+    manaatual = 0
     atk = 0
     matk = 0
+    quemataca = 1
     def __init__ (self, nome, maxhp, maxmana, atk, matk):
         self.nome = nome
         self.maxhp = maxhp
@@ -21,38 +23,64 @@ class classes:
         self.atk = atk
         self.matk = matk
         self.hpatual = maxhp
+        self.manaatual = maxmana
 
     def atacar(self):
-        print("Rolando um dado... ")
+        print("Rolando um dado... (Arma)")
         os.system('pause')
         r = random.randrange(1, 21)
         if r == 1:
+            print(colorama.Fore.RED + "ERRO CRITICO!" + colorama.Fore.RESET)
             dmg = 0
         elif r == 20:
             print(colorama.Fore.RED + "DANO CRITICO!" + colorama.Fore.RESET)
             dmg = self.atk * 2
         else:
             dmg = random.randrange(1, int(self.atk)+1)
-        print("Rolou: " + str(r) + " você causou " + colorama.Fore.RED + str(dmg) + colorama.Fore.RESET + " pontos de dano")
+        print("Rolou: " + str(r) + "\nDano causado " + colorama.Fore.RED + str(dmg) + colorama.Fore.RESET)
         os.system('pause')
-        return dmg
+        if classes.quemataca == 1:
+            inimigo.hpatual = inimigo.hpatual - dmg
+        elif classes.quemataca == 0:
+            jogador.hpatual = jogador.hpatual - dmg
+
+        if classes.quemataca == 1:
+            classes.quemataca = 0
+        elif classes.quemataca == 0:
+            classes.quemataca = 1
     
     def fireball(self):
-        self.maxmana = self.maxmana-4
-        print("Rolando um dado... ")
+        self.manaatual = self.manaatual-4
+        print("Rolando um dado... (Cast)")
         os.system('pause')
         r = random.randrange(1, 21)
         if r == 1:
+            print(colorama.Fore.RED + "ERRO CRITICO!" + colorama.Fore.RESET)
             dmg = 0
         elif r == 20:
             print(colorama.Fore.RED + "DANO CRITICO!" + colorama.Fore.RESET)
             dmg = self.matk * 2
         else:
             dmg = random.randrange(1, int(self.matk)+1)
-        print("Rolou: " + str(r) + " você causou " + colorama.Fore.RED + str(dmg) + colorama.Fore.RESET + " pontos de dano")
+        print("Rolou: " + str(r) + "\nDano causado " + colorama.Fore.RED + str(dmg) + colorama.Fore.RESET)
         os.system('pause')
-        return dmg
-    
+        if classes.quemataca == 1:
+            inimigo.hpatual = inimigo.hpatual - dmg
+        elif classes.quemataca == 0:
+            jogador.hpatual = jogador.hpatual - dmg
+        
+        if classes.quemataca == 1:
+            classes.quemataca = 0
+        elif classes.quemataca == 0:
+            classes.quemataca = 1
+
+    def decide(self):
+        ri = random.randrange(1, 3)
+        if ri == 1:
+            inimigo.atacar()
+        elif ri == 2:
+            inimigo.fireball()
+
     def artemago():
         print(" ______________________________")        
         print("|               ,              |")
@@ -128,17 +156,27 @@ class classes:
         print("Ataque magico do jogador: " + str(jogador.matk))
         os.system('pause')
 
+    def checagem(self):
+        if inimigo.hpatual <= 0:    
+            return 1
+        elif jogador.hpatual <= 0:
+            return 2
+        else:
+            return 0
+
 mago = classes("Mago", 30, 20, 1, 6)
 classe.append(mago)
-barbaro = classes("Barbaro", 60, 5, 5, 1)
+barbaro = classes("Barbaro", 45, 5, 5, 1)
 classe.append(barbaro)
 
-os.system('cls')
-print("Escolha a classe de seu personagem: ")
-print("0 - Mago")
-#print("1 - Barbaro")
-opc = int(input("Escolha: "))
-jogador = classe[opc]
+try:
+    os.system('cls')
+    print("Escolha a classe de seu personagem: ")
+    print("0 - Mago")
+    opc = int(input("Escolha: "))
+    jogador = classe[opc]
+except:
+    print("Seleção Inválida")
 print("O CPU está selecionando uma classe", end="") ; sleep(1)
 
 for x in range(1, 4):
@@ -155,9 +193,7 @@ print("Classe escolhida.........: " + classe[opc].nome)
 print("Classe escolhida pela CPU: " + inimigo.nome)
 os.system('pause')
 
-jogador.hpatual = 5
-inimigo.hpatual = 2
-while jogador.hpatual != 0 or inimigo.hpatual != 0:
+while jogador.hpatual > 0 and inimigo.hpatual > 0:
     os.system('cls')
     inimigo.att()
     print("1 - Ataque com Arma")
@@ -167,11 +203,47 @@ while jogador.hpatual != 0 or inimigo.hpatual != 0:
         r = int(input("Escolha sua ação: "))
         if r == 1:
             jogador.atacar()
+            os.system('cls')
+            inimigo.att()
+            if jogador.checagem() == 1:
+                print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                break
+            elif jogador.checagem() == 2:
+                print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                break
+            else:
+                print("Ação do oponente: ")
+                inimigo.decide()
+                if jogador.checagem() == 1:
+                    print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                    break
+                elif jogador.checagem() == 2:
+                    print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                    break
         elif r == 2:
             jogador.fireball()
+            os.system('cls')
+            inimigo.att()
+            if jogador.checagem() == 1:
+                print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                break
+            elif jogador.checagem() == 2:
+                print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                break
+            else:
+                print("Ação do oponente: ")
+                inimigo.decide()
+                if jogador.checagem() == 1:
+                    print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                    break
+                elif jogador.checagem() == 2:
+                    print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                    break
         elif r == 3:
             jogador.infos()
-    except:
-        print("Escolha uma opção válida!")
+        elif r == 4:
+            print("DESISTIU PQ IRMÃO??")
+            break
+    except Exception as error:
+        print(error)
         os.system('pause')
-    #break
