@@ -206,38 +206,38 @@ while jogador.hpatual > 0 and inimigo.hpatual > 0:
             os.system('cls')
             inimigo.att()
             if jogador.checagem() == 1:
-                print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" + colorama.Fore.RESET)
                 break
             elif jogador.checagem() == 2:
-                print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.reset)
                 break
             else:
                 print("Ação do oponente: ")
                 inimigo.decide()
                 if jogador.checagem() == 1:
-                    print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                    print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" + colorama.Fore.RESET)
                     break
                 elif jogador.checagem() == 2:
-                    print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                    print("Você morreu!")
                     break
         elif r == 2:
             jogador.fireball()
             os.system('cls')
             inimigo.att()
             if jogador.checagem() == 1:
-                print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" + colorama.Fore.RESET)
                 break
             elif jogador.checagem() == 2:
-                print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                print("Você morreu!")
                 break
             else:
                 print("Ação do oponente: ")
                 inimigo.decide()
                 if jogador.checagem() == 1:
-                    print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" colorama.Fore.RESET)
+                    print(colorama.Fore.LIGHTGREEN_EX + "Você venceu!" + colorama.Fore.RESET)
                     break
                 elif jogador.checagem() == 2:
-                    print(colorama.Fore.RED + "Você morreu!" + colorama.Fore.RESET)
+                    print("Você morreu!")
                     break
         elif r == 3:
             jogador.infos()
